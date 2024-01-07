@@ -19,4 +19,13 @@ class LinkedList(var h: Int, var t: MyList) extends MyList {
     else
       h + " " + t.printElements
   }
+  override def remove(element: Int): MyList = {
+    if(head == element && tail.isEmpty)
+      Empty
+    else if(head == element) {
+      new LinkedList(tail.head, tail.tail)
+    } else {
+      new LinkedList(head, tail.remove(element))
+    }
+  }
 }

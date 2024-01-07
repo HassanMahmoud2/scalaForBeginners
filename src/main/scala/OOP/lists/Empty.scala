@@ -6,4 +6,5 @@ object Empty extends MyList{
   def isEmpty: Boolean = true
   def add(element: Int): MyList = new LinkedList(element, Empty)
   def printElements: String = ""
+  override def remove(element: Int): MyList = throw new NoSuchElementException
 }
