@@ -1,10 +1,9 @@
 package OOP.lists
-
-object Empty extends MyList{
-  def head: Int = throw new NoSuchElementException
-  def tail: MyList = throw new NoSuchElementException
+class Empty[A] extends MyList[A] {
+  def head: A = throw new NoSuchElementException
+  def tail: MyList[A] = throw new NoSuchElementException
   def isEmpty: Boolean = true
-  def add(element: Int): MyList = new LinkedList(element, Empty)
+  def add(element: A): MyList[A] = new LinkedList(element, new Empty[A])
   def printElements: String = ""
-  override def remove(element: Int): MyList = throw new NoSuchElementException
+  override def remove(element: A): MyList[A] = throw new NoSuchElementException
 }

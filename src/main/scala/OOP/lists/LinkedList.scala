@@ -2,13 +2,13 @@ package OOP.lists
 
 import scala.language.postfixOps
 
-class LinkedList(var h: Int, var t: MyList) extends MyList {
-  override def head: Int = h
-  override def tail: MyList = t
+class LinkedList[A](var h: A, var t: MyList[A]) extends MyList[A] {
+  override def head: A = h
+  override def tail: MyList[A] = t
   override def isEmpty: Boolean = false
-  override def add(element: Int): MyList = {
+  override def add(element: A): MyList[A] = {
     if (tail isEmpty) {
-      new LinkedList(head, new LinkedList(element, Empty))
+      new LinkedList(head, new LinkedList(element, new Empty))
     } else {
       new LinkedList(head, tail.add(element))
     }
@@ -19,9 +19,9 @@ class LinkedList(var h: Int, var t: MyList) extends MyList {
     else
       h + " " + t.printElements
   }
-  override def remove(element: Int): MyList = {
+  override def remove(element: A): MyList[A] = {
     if(head == element && tail.isEmpty)
-      Empty
+      new Empty
     else if(head == element) {
       new LinkedList(tail.head, tail.tail)
     } else {
