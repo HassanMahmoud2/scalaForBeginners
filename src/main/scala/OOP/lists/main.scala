@@ -2,13 +2,19 @@ package OOP.lists
 
 object main extends App {
 
-  var intLinkedList : MyList[Int] = new LinkedList(1, new LinkedList(2, new LinkedList(3, new Empty)))
-  intLinkedList = intLinkedList.add(4)
-  println(intLinkedList.toString)
-  println(intLinkedList.remove(2))
+  var linkedList: LinkedList[Int] = new LinkedList();
+  linkedList.push(1)
+  linkedList.push(2)
+  linkedList.push(3)
+  println("pushed 1 2 3 to the list and here is the list after pushing")
+  linkedList.printList()
+  println("is the list empty?")
+  println(linkedList.isEmpty())
+  println("let's empty the list")
+  linkedList.remove(3)
+  linkedList.remove(1)
+  linkedList.remove(2)
+  println("the list is empty now, so lets test isEmpty function")
+  println(linkedList.isEmpty())
 
-  var stringLinkedList : MyList[String] = new LinkedList("Hassan", new LinkedList("Khalifa", new LinkedList("Aliaa", new Empty)))
-  stringLinkedList = stringLinkedList.add("Omar")
-  println(stringLinkedList.toString)
-  println(stringLinkedList.remove("Hassan"))
 }

@@ -1,31 +1,67 @@
 package OOP.lists
 
-import scala.language.postfixOps
+import scala.annotation.tailrec
+import scala.util.control.Breaks.break
 
-class LinkedList[A](var h: A, var t: MyList[A]) extends MyList[A] {
-  override def head: A = h
-  override def tail: MyList[A] = t
-  override def isEmpty: Boolean = false
-  override def add(element: A): MyList[A] = {
-    if (tail isEmpty) {
-      new LinkedList(head, new LinkedList(element, new Empty))
+class LinkedList[T]() {
+  var head: Node[T] = null;
+
+  def push(data: T): Unit = {
+    if(head == null) {
+      head = new Node(data, null)
     } else {
-      new LinkedList(head, tail.add(element))
+      pushRecursive(head, data)
     }
   }
-  def printElements: String = {
-    if(t.isEmpty)
-      "" + h
-    else
-      h + " " + t.printElements
-  }
-  override def remove(element: A): MyList[A] = {
-    if(head == element && tail.isEmpty)
-      new Empty
-    else if(head == element) {
-      new LinkedList(tail.head, tail.tail)
+  @tailrec
+  private def pushRecursive(current: Node[T], data: T): Unit = {
+    if(current.next == null) {
+      current.next = new Node[T](data, null)
     } else {
-      new LinkedList(head, tail.remove(element))
+      pushRecursive(current.next, data: T)
+    }
+  }
+
+  def printList() = {
+    print("[")
+    if (head != null) {
+      print(head.data)
+      printElements(head.next)
+    }
+    println("]")
+  }
+  private def printElements(current: Node[T]): Unit = {
+    if (current != null) {
+      print(", " + current.data)
+      printElements(current.next)
+    }
+  }
+  def remove(deleteItem: T): Unit = {
+    removeRecursive(head, head, deleteItem)
+  }
+  private def removeRecursive(previous: Node[T], current: Node[T], deleteItem: T): Unit = {
+    if (current != null) {
+      if (current.data.equals(deleteItem)) {
+        if (current.equals(previous)) {
+          head = current.next
+        } else {
+          previous.next = current.next
+        }
+      } else {
+        removeRecursive(current, current.next, deleteItem)
+      }
+    }
+  }
+  def isEmpty(): Boolean = {
+    if(head == null) {
+      true
+    } else {
+      false
     }
   }
 }
+
+
+
+
+
