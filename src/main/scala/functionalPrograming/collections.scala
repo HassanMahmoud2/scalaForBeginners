@@ -37,7 +37,17 @@ object collections extends App{
   val newVector = vector :+ 4
 
   /** 4. Map:	the base Map (key/value pairs) class **/
+  val states = Map(
+    "AK" -> "Alaska",
+    "AL" -> "Alabama",
+    "AZ" -> "Arizona"
+  )
+  //println(states("AK"))
+  val newStates = states - "AK"
+  //println(newStates("AK"))
 
-  /** 5. Set:	the base Set class **/
+  /** 5. Set:	the base Set class, The Scala Set is an iterable collection with no duplicate elements. **/
+  val nums = Set(1, 2, 3, 3, 3)           // Set(1, 2, 3)
+  println(nums)
 
 }
